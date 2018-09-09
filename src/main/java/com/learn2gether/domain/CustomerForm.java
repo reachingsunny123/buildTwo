@@ -1,16 +1,12 @@
-package com.learn2gether.comands;
+package com.learn2gether.domain;
+
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.validation.constraints.Size;
-
-/**
- * Created by jt on 2/1/16.
- */
-public class CheckoutCommand {
-
-    @NotEmpty
+public class CustomerForm {
+	@NotEmpty
     @Size(min = 2, max = 50)
     private String firstName;
 
@@ -20,31 +16,25 @@ public class CheckoutCommand {
 
     @NotEmpty
     @Size(min = 2, max = 50)
+    private String city;
+
+    @NotEmpty
+    @Size(min = 2, max = 2)
+    private String stateCode;
+    
+    @NotEmpty
+    @Size(min = 2, max = 50)
     private String email;
     
     @NotEmpty
-    @Size(min = 6, max = 12)
+    @Size(min = 6, max = 10)
     private String phone;
 
     @NotEmpty
-    @Size(min = 2, max = 50)
-    private String city;
-
-    private String stateCode;
-
+    @Size(min = 5, max = 10)
     private String zipCode;
-    
-    private MultipartFile photo;
 
-    public MultipartFile getPhoto() {
-		return photo;
-	}
-
-	public void setPhoto(MultipartFile photo) {
-		this.photo = photo;
-	}
-
-	public String getFirstName() {
+    public String getFirstName() {
         return firstName;
     }
 
@@ -60,8 +50,23 @@ public class CheckoutCommand {
         this.lastName = lastName;
     }
 
+    public String getEmail() {
+		return email;
+	}
 
-    public String getCity() {
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getCity() {
         return city;
     }
 
@@ -83,23 +88,5 @@ public class CheckoutCommand {
 
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
-    }
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-    
-    
+    }	
 }

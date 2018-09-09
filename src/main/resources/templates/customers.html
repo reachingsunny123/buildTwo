@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Users</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link th:href="@{/css/custom.css}" rel="stylesheet" media="screen"/>
+
+    <style >
+        
+ 
+    .row {
+            margin-left: -15px;
+            margin-right: -15px;
+        }
+
+        *::before, *::after {
+            box-sizing: border-box;
+        }
+
+     
+        
+           .navbar {
+      padding-top: 15px;
+      padding-bottom: 15px;
+      border: 0;
+      border-radius: 0;
+      margin-bottom: 0;
+      font-size: 12px;
+      letter-spacing: 5px;
+  }
+  .navbar-nav  li a:hover {
+      color: #1abc9c !important;
+  }
+        </style>
+</head>
+<body>
+<div class="jumbotron" th:replace="fragments/jumbotron :: jumbotron">
+    <div class="container">
+        <!-- <h1>Spring Framework Guru</h1>
+        <p class="lead" th:text="#{index.courses.tagline}">Tag line</p> -->
+    </div>
+</div>
+<div class="container">
+    <div th:if="${not #lists.isEmpty(customers)}">
+        <h2>Registered Users</h2>
+        <div class="row" >				
+ 		 <div class="col-md-12">
+        <table class="table table-striped">
+            <tr>
+               <!--  <th>Id</th> -->
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Photo</th>
+               
+            </tr>
+            <tr th:each="customer : ${customers}">
+                <!-- <td th:text="${customer.id.toHexString()}"></td> -->
+                <td th:text="${customer.firstName}"></td>
+                <td th:text="${customer.lastName}"></td>
+                <td th:text="${customer.phone}"></td>
+                <td th:text="${customer.email}"></td>
+                <td>
+		        <a th:href="@{${customer.customerImage?.url}}">
+		          <img  th:src="@{${customer.customerImage?.url}}" alt="No Photo" 
+		             style="height:50px; width:50px"/>
+		        </a>
+		      </td>
+            </tr>
+        </table>
+        </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+           <!--  <a href="/product/new">New Product</a> -->
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

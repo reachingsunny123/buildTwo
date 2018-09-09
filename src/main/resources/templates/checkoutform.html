@@ -3,27 +3,48 @@
 <head>
     <meta charset="UTF-8"/>
 
-    <link href="../static/css/bootstrap-3.3.4-dist/css/bootstrap.min.css" rel="stylesheet" media="screen"
-          th:href="@{/css/bootstrap-3.3.4-dist/css/bootstrap.min.css}"/>
-
-    <script src="../static/js/jquery-2.1.4.min.js"
-            th:src="@{/js/jquery-2.1.4.min.js}"></script>
-
+     <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link th:href="@{/css/custom.css}" rel="stylesheet" media="screen"/>
-    <title>Checkout</title>
+    <title>Register</title>
+    <style type="text/css">
+       .navbar {
+      padding-top: 15px;
+      padding-bottom: 15px;
+      border: 0;
+      border-radius: 0;
+      margin-bottom: 0;
+      font-size: 12px;
+      letter-spacing: 5px;
+  }
+  .navbar-nav  li a:hover {
+      color: #1abc9c !important;
+  }
+    </style>
 </head>
 <body>
-<div class="container">
-    <h2>Checkout Form</h2>
+ <div class="jumbotron" th:replace="fragments/jumbotron :: jumbotron">
+    <div class="container">
+        <!-- <h1>Spring Framework Guru</h1>
+        <p class="lead" th:text="#{index.courses.tagline}">Tag line</p> -->
+    </div>
+</div>
 
-    <form class="form-horizontal" th:object="${checkoutCommand}" th:action="@{/docheckout}" method="post">
+<div class="container">
+    <h2>Register</h2>
+
+    <form class="form-horizontal" th:object="${checkoutCommand}" th:action="@{/docheckout}" method="post" enctype="multipart/form-data">
 
         <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
             <p th:text="#{checkoutCommand.hasErrors}">Error Message</p>
         </div>
 
         <div class="form-group" th:class="${#fields.hasErrors('firstName')} ? 'form-group has-error' : 'form-group'">
-            <label class="col-sm-2 control-label">First Name:</label>
+            <label class="col-sm-2 control-label">First Name(*):</label>
             <div class="col-sm-10">
                 <input type="text" class="form-control" th:field="*{firstName}" th:errorclass="has-error"/>
 
@@ -36,7 +57,7 @@
         </div>
 
         <div class="form-group" th:class="${#fields.hasErrors('lastName')} ? 'form-group has-error' : 'form-group'">
-            <label class="col-sm-2 control-label">Last Name:</label>
+            <label class="col-sm-2 control-label">Last Name(*):</label>
             <div class="col-sm-10">
                 <input type="text" class="form-control" th:field="*{lastName}" th:errorclass="has-error"/>
 
@@ -48,34 +69,34 @@
             </div>
         </div>
 
-        <div class="form-group" th:class="${#fields.hasErrors('addressLine1')} ? 'form-group has-error' : 'form-group'">
-            <label class="col-sm-2 control-label">Address Line 1:</label>
+        <div class="form-group" th:class="${#fields.hasErrors('phone')} ? 'form-group has-error' : 'form-group'">
+            <label class="col-sm-2 control-label">Phone(*):</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" th:field="*{addressLine1}" th:errorclass="has-error"/>
+                <input type="text" class="form-control" th:field="*{phone}" th:errorclass="has-error"/>
 
-                <span class="help-block" th:if="${#fields.hasErrors('addressLine1')}">
+                <span class="help-block" th:if="${#fields.hasErrors('phone')}">
                        <ul>
-                           <li th:each="err : ${#fields.errors('addressLine1')}" th:text="${err}" />
+                           <li th:each="err : ${#fields.errors('phone')}" th:text="${err}" />
                        </ul>
                 </span>
             </div>
         </div>
 
-        <div class="form-group" th:class="${#fields.hasErrors('addressLine2')} ? 'form-group has-error' : 'form-group'">
-            <label class="col-sm-2 control-label">Address Line 2:</label>
+        <div class="form-group" th:class="${#fields.hasErrors('email')} ? 'form-group has-error' : 'form-group'">
+            <label class="col-sm-2 control-label">Email(*):</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" th:field="*{addressLine2}" th:errorclass="has-error"/>
+                <input type="text" class="form-control" th:field="*{email}" th:errorclass="has-error"/>
 
-                <span class="help-block" th:if="${#fields.hasErrors('addressLine2')}">
+                <span class="help-block" th:if="${#fields.hasErrors('email')}">
                        <ul>
-                           <li th:each="err : ${#fields.errors('addressLine2')}" th:text="${err}" />
+                           <li th:each="err : ${#fields.errors('email')}" th:text="${err}" />
                        </ul>
                 </span>
             </div>
         </div>
 
         <div class="form-group" th:class="${#fields.hasErrors('city')} ? 'form-group has-error' : 'form-group'">
-            <label class="col-sm-2 control-label">City:</label>
+            <label class="col-sm-2 control-label">City(*):</label>
             <div class="col-sm-10">
                 <input type="text" class="form-control" th:field="*{city}" th:errorclass="has-error"/>
 
@@ -87,7 +108,7 @@
             </div>
         </div>
 
-        <div class="form-group" th:class="${#fields.hasErrors('stateCode')} ? 'form-group has-error' : 'form-group'">
+       <!--  <div class="form-group" th:class="${#fields.hasErrors('stateCode')} ? 'form-group has-error' : 'form-group'">
             <label class="col-sm-2 control-label">State Code:</label>
             <div class="col-sm-10">
                 <input type="text" class="form-control" th:field="*{stateCode}" th:errorclass="has-error"/>
@@ -98,9 +119,9 @@
                        </ul>
                 </span>
             </div>
-        </div>
+        </div> -->
 
-        <div class="form-group" th:class="${#fields.hasErrors('zipCode')} ? 'form-group has-error' : 'form-group'">
+       <!--  <div class="form-group" th:class="${#fields.hasErrors('zipCode')} ? 'form-group has-error' : 'form-group'">
             <label class="col-sm-2 control-label">Zip Code:</label>
             <div class="col-sm-10">
                 <input type="text" class="form-control" th:field="*{zipCode}" th:errorclass="has-error"/>
@@ -111,7 +132,16 @@
                        </ul>
                 </span>
             </div>
-        </div>
+        </div> -->
+        
+        
+        
+        <div class="form-group">
+        <label class="col-sm-2 control-label">Profile photo(1MB):</label>
+        <div class="col-sm-10">
+        <input name="image" id="image" type="file" class="form-control" th:field="*{photo}"/>
+              </div>
+      </div>
 
         <div class="row">
             <button type="submit" class="btn btn-default">Submit</button>
